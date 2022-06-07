@@ -8,10 +8,10 @@
          allMovies().then((data) => {
              let movieCard = data.map(movie => {
                  return `<div>
-                    <h2>Title: ${movie.title}</h2>
-                    <h3>Director: ${movie.director}</h3>
-                    <h3>Genre: ${movie.genre}</h3>
-                    <h3>Rating: ${movie.rating}</h3>
+                    <h3>Title: ${movie.title}</h3>
+                    <h4>Director: ${movie.director}</h4>
+                    <h4>Genre: ${movie.genre}</h4>
+                    <h4>Rating${movie.rating}</h4>
                     </div>`
              })
              console.log(movieCard);
