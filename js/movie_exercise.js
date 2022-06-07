@@ -7,10 +7,10 @@
     let renderMovies = () => {
          allMovies().then((data) => {
              let movieCard = data.map(movie => {
-                 return `<div class="col-2">
+                 return `<div class="col-2 movieCards">
                     <h3>Title: ${movie.title}</h3>
                     <h4>Rating: ${movie.rating}</h4>
-                    <button class="edit">Edit</button>
+                    <button class=edit${movie.id}>Edit</button>
                     </div>`
              })
              console.log(movieCard);
@@ -30,6 +30,7 @@
         }
         return fetch(URL, options).then(resp => resp.json()).then(result => console.log(result))
     }
+
 let movie1 = {
         id: 8,
         title: 'jimmyjohn'
@@ -47,7 +48,7 @@ let movie1 = {
 
 
     // All EVENT LISTENERS
-    $('#addMovie').click(function(e) {
+    $('#addMovie').click((e) => {
         e.preventDefault();
         let addNewMovie = {
             title: $('#movieTitle').val(),
@@ -56,8 +57,8 @@ let movie1 = {
         addMovie(addNewMovie).then(renderMovies)
     });
 
-    $('.edit').click(function() {
-        $("#hiddenForm").css("visibility","visible")
+    $(".movieCards>button").click(function() {
+
     });
 
 
