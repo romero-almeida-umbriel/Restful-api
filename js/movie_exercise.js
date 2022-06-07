@@ -10,11 +10,13 @@
                  return `<div class="col-2 movieCards">
                     <h3>Title: ${movie.title}</h3>
                     <h4>Rating: ${movie.rating}</h4>
-                    <button class=edit${movie.id}>Edit</button>
+                    <button data-id=${movie.id} class="edit">Edit</button>
                     </div>`
+
              })
-             console.log(movieCard);
              $("#movies").html(movieCard);
+             editComplete();
+
          })
 
     };
@@ -31,10 +33,7 @@
         return fetch(URL, options).then(resp => resp.json()).then(result => console.log(result))
     }
 
-let movie1 = {
-        id: 8,
-        title: 'jimmyjohn'
-}
+
     const editMovie = (movie) => {
         let options = {
             method: 'PATCH',
@@ -57,9 +56,22 @@ let movie1 = {
         addMovie(addNewMovie).then(renderMovies)
     });
 
-    $(".movieCards>button").click(function() {
-
-    });
+    let editComplete= () => {
+        $("button").click((e) => {
+            e.preventDefault();
+            let thisId = e.target.attributes[0].value;
+            $("#hide").toggleClass("hiddenForm");
+             $("#edit").click((e) => {
+                e.preventDefault()
+                let edit = {
+                    id: thisId,
+                    title: $("#popupTitle").val(),
+                    rating: $("#popupRating").val()
+                }
+                editMovie(edit).then(renderMovies);
+            })
+        })
+    }
 
 
 }());

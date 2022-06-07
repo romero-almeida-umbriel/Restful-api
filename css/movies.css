@@ -1,10 +1,14 @@
-.hiddenForm {
+#hide{
     width: 400px;
     height: 200px;
-    visibility: hidden;
-background: black;
+    background: black;
     border-radius: 10px;
     color: floralwhite;
+}
+.hiddenForm {
+
+    visibility: hidden;
+
 }
 input, button {
     border-radius: 10px;
