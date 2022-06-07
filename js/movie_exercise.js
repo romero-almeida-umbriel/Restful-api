@@ -7,10 +7,10 @@
     let renderMovies = () => {
          allMovies().then((data) => {
              let movieCard = data.map(movie => {
-                 return `<div>
+                 return `<div class="col-2">
                     <h3>Title: ${movie.title}</h3>
                     <h4>Rating: ${movie.rating}</h4>
-                    <button id="edit">Edit</button>
+                    <button class="edit">Edit</button>
                     </div>`
              })
              console.log(movieCard);
@@ -30,7 +30,10 @@
         }
         return fetch(URL, options).then(resp => resp.json()).then(result => console.log(result))
     }
-
+let movie1 = {
+        id: 8,
+        title: 'jimmyjohn'
+}
     const editMovie = (movie) => {
         let options = {
             method: 'PATCH',
@@ -39,24 +42,23 @@
             },
             body: JSON.stringify(movie)
         }
-        return fetch(`${URL}, ${options}`).then(resp => resp.json())
+        return fetch(`${URL}/${movie.id}`,options).then(resp => resp.json())
     }
 
+
+    // All EVENT LISTENERS
     $('#addMovie').click(function(e) {
         e.preventDefault();
         let addNewMovie = {
             title: $('#movieTitle').val(),
             rating: $('#movieRating').val(),
         }
-        addMovie(addNewMovie).then(resp => renderMovies())
-    })
+        addMovie(addNewMovie).then(renderMovies)
+    });
 
-    $('#edit').click(function() {
-        let editMovie = {
-
-        }
-
-    })
+    $('.edit').click(function() {
+        $("#hiddenForm").css("visibility","visible")
+    });
 
 
 }());

@@ -1,0 +1,11 @@
+#hiddenForm {
+    width: 400px;
+    height: 200px;
+    visibility: hidden;
+background: black;
+    border-radius: 10px;
+    color: floralwhite;
+}
+input, button {
+    border-radius: 10px;
+}
