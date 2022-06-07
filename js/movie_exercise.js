@@ -11,11 +11,12 @@
                     <h3>Title: ${movie.title}</h3>
                     <h4>Rating: ${movie.rating}</h4>
                     <button data-id=${movie.id} class="edit">Edit</button>
+                    <button data-id=${movie.id} class="delete">Remove</button>
                     </div>`
-
              })
              $("#movies").html(movieCard);
              editComplete();
+             deleteMovies();
 
          })
 
@@ -33,7 +34,6 @@
         return fetch(URL, options).then(resp => resp.json()).then(result => console.log(result))
     }
 
-
     const editMovie = (movie) => {
         let options = {
             method: 'PATCH',
@@ -44,6 +44,18 @@
         }
         return fetch(`${URL}/${movie.id}`,options).then(resp => resp.json())
     }
+
+    const deleteMovie = (movie) => {
+        let options = {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        return fetch(`${URL}/${movie}`, options).then((data) => data.json())
+    };
+
+
 
 
     // All EVENT LISTENERS
@@ -56,8 +68,16 @@
         addMovie(addNewMovie).then(renderMovies)
     });
 
+   let deleteMovies = () => {
+       $('.delete').click((e) => {
+           e.preventDefault()
+           let thisId = e.target.attributes[0].value;
+           deleteMovie(thisId).then(renderMovies)
+       });
+   }
+
     let editComplete= () => {
-        $("button").click((e) => {
+        $(".edit").click((e) => {
             e.preventDefault();
             let thisId = e.target.attributes[0].value;
             $("#hide").toggleClass("hiddenForm");
@@ -72,6 +92,5 @@
             })
         })
     }
-
 
 }());
