@@ -7,13 +7,16 @@
     let allMovies = () => fetch(URL).then(res => res.json());
     //Function to render movies
     let renderMovies = () => {
-        allMovies().then((data) => {
-          return data.map(movie => movie.title);
-
-        }).then(data => {
-            let movieTitle = data.map(movie => {
-                posterMovies(movie)
+        allMovies().then(data => {
+            let movieTitle = data.map(movie =>{
+                return `<div class="col-2 movieCards">
+                    <h3>Title: ${movie.title}</h3>
+                    <h4>Rating: ${movie.rating}</h4>
+                    <button data-id=${movie.id} class="edit">Edit</button>
+                    <button data-id=${movie.id} class="delete">Remove</button>
+                    </div>`
             })
+
             $("#movies").html(movieTitle);
             editComplete();
             deleteMovies();
@@ -117,19 +120,29 @@
 
     //movie poster api
     //Function to get all movie objects information
-    let posterMovies = (movie) => {
-        const movieURL = `http://www.omdbapi.com/?i=tt3896198&apikey=43fb5106&t=${encodeURIComponent(movie)}`
-        fetch(movieURL).then(res => res.json()).then(res => {
-            return `<div class="col-2 movieCards">
-                    <h3>Title: ${res.Title}</h3>
-                    <h4>Genre: ${res.Genre}</h4>
-                    <h4>Rating: ${res.imdbRating}</h4>
-                    <button data-id=${res.id} class="edit">Edit</button>
-                    <button data-id=${res.id} class="delete">Remove</button>
-                    </div>`
+    let posterMovies = () => allMovies().then((movie) => {
+        movie = movie.map(obj => obj.title)
+        console.log(movie);
+        for(let mov of movie) {
+            const movieURL = `http://www.omdbapi.com/?i=tt3896198&apikey=43fb5106&t=${encodeURIComponent(mov)}`
+            fetch(movieURL).then(res => res.json()).then(res => {
+                console.log(res);
+                let movieTitle = `<div class="col-2 movieCards">
+                        <h3>Title: ${res.Title}</h3>
+                        <h4>Genre: ${res.Genre}</h4>
+                        <h4>Rating: ${res.imdbRating}</h4>
+                        <button data-id=${res.id} class="edit">Edit</button>
+                        <button data-id=${res.id} class="delete">Remove</button>
+                        </div>`
+                $("#movies").append(movieTitle);
+                editComplete();
+                deleteMovies();
+            })
 
-        })
+        }
 
-    };
+
+    });
+    posterMovies()
 
 }());
