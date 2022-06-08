@@ -1,7 +1,7 @@
 "use strict";
 (function () {
     const URL = 'https://expensive-narrow-license.glitch.me/movies';
-    //Function to get all movies
+    //Function to get all movie objects information
     let allMovies = () => fetch(URL).then(res => res.json());
     //Function to render movies
     let renderMovies = () => {
@@ -90,5 +90,29 @@
             })
         })
     }
+
+    let sortRating = () => {
+        allMovies().then((data) => {
+            let newRatings = data
+         console.log(newRatings);
+                // .map(rate => console.log(rate));
+            // newRatings = newRatings.sort((a, b) => a - b)
+
+
+            // newRatings.map(movie => {
+            //     return `<div class="col-2 movieCards">
+            //         <h3>Title: ${movie.title}</h3>
+            //         <h4>Rating: ${movie.rating}</h4>
+            //         <button data-id=${movie.id} class="edit">Edit</button>
+            //         <button data-id=${movie.id} class="delete">Remove</button>
+            //         </div>`
+            // })
+            //
+
+        })
+
+    }
+    sortRating();
+
 
 }());
