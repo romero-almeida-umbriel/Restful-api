@@ -1,24 +1,25 @@
 "use strict";
 (function () {
-    const URL = 'https://expensive-narrow-license.glitch.me/movies';
+
+    //glitch url
+    const URL = 'https://materialistic-joyous-cowl.glitch.me/movies';
     //Function to get all movie objects information
     let allMovies = () => fetch(URL).then(res => res.json());
     //Function to render movies
     let renderMovies = () => {
         allMovies().then((data) => {
-            let movieCard = data.map(movie => {
-                return `<div class="col-2 movieCards">
-                    <h3>Title: ${movie.title}</h3>
-                    <h4>Rating: ${movie.rating}</h4>
-                    <button data-id=${movie.id} class="edit">Edit</button>
-                    <button data-id=${movie.id} class="delete">Remove</button>
-                    </div>`
+          return data.map(movie => movie.title);
+
+        }).then(data => {
+            let movieTitle = data.map(movie => {
+                posterMovies(movie)
             })
-            $("#movies").html(movieCard);
+            $("#movies").html(movieTitle);
             editComplete();
             deleteMovies();
 
         })
+
 
     };
     renderMovies();
@@ -91,10 +92,10 @@
         })
     }
 
-    let sortRating = () => {
-        allMovies().then((data) => {
-            let newRatings = data
-         console.log(newRatings);
+    // let sortRating = () => {
+    //     allMovies().then((data) => {
+    //         let newRatings = data
+    //      console.log(newRatings);
                 // .map(rate => console.log(rate));
             // newRatings = newRatings.sort((a, b) => a - b)
 
@@ -107,12 +108,28 @@
             //         <button data-id=${movie.id} class="delete">Remove</button>
             //         </div>`
             // })
-            //
+
+
+        // })
+
+    // }
+    // sortRating();
+
+    //movie poster api
+    //Function to get all movie objects information
+    let posterMovies = (movie) => {
+        const movieURL = `http://www.omdbapi.com/?i=tt3896198&apikey=43fb5106&t=${encodeURIComponent(movie)}`
+        fetch(movieURL).then(res => res.json()).then(res => {
+            return `<div class="col-2 movieCards">
+                    <h3>Title: ${res.Title}</h3>
+                    <h4>Genre: ${res.Genre}</h4>
+                    <h4>Rating: ${res.imdbRating}</h4>
+                    <button data-id=${res.id} class="edit">Edit</button>
+                    <button data-id=${res.id} class="delete">Remove</button>
+                    </div>`
 
         })
 
-    }
-    sortRating();
-
+    };
 
 }());
