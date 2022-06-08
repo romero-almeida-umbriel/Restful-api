@@ -55,6 +55,22 @@
         return fetch(`${URL}/${movie}`, options).then((data) => data.json())
     };
 
+    //  SORTING
+
+    let movieCard = allMovies.map(movieRating)
+    function sortedRating() {
+        let movieCard.map(movieRating => {
+            return {movieRating, value: sortedRating(renderMovies)};
+        })
+    }
+    movieCard.sort((a, b) => {
+        if (a > b) {
+            return 1;
+        } if (a < b) {
+            return -1;
+        } else return 0;
+    })
+    let result = parseFloat(movieCard.map(rating => movieCard[rating.i]));
 
     // All EVENT LISTENERS
     $('#addMovie').click((e) => {
@@ -90,5 +106,7 @@
             })
         })
     }
+;
+
 
 }());
