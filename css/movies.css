@@ -19,7 +19,9 @@ background: black;
 
 }
 input, button {
-    border-radius: 10px;
+    border-radius: 5px;
+    background: black;
+    color: floralwhite;
 }
 #movies img {
     height: 300px;
