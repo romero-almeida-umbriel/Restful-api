@@ -4,7 +4,8 @@
 
     <meta charset="UTF-8">
     <title>Movies App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/movies.css">
 </head>
 <body>
@@ -15,29 +16,20 @@
         <input id="movieTitle" type="text" placeholder="Movie Title..">
         <!--        <label for="movieRating">Movie Rating: </label>-->
         <!--            <input id="movieRating" type="text">-->
-                <button id="addMovie">Add Movie</button>
+        <button type="submit" id="addMovie">Add Movie</button>
     </form>
-
 </nav>
-
-
-
-
-
-
 <div class="row justify-content-center" id="main">
- <!-- CHANGE HTML CONTENT FROM 'LOADING GIF' TO MOVIE DATA-->
-<div class="row align-items-end" id="movies">
-        <img class="justify-self-center" alt="loading-screen" src="img/loading.gif">
-</div>
+    <!-- CHANGE HTML CONTENT FROM 'LOADING GIF' TO MOVIE DATA-->
+    <div class="row justify-content-center align-items-end" id="movies">
+        <img class="w-50" alt="loading-screen" src="img/loading.gif">
+    </div>
 
 
     <div id="hide" class="col-12 mt-5 hiddenForm ">
         <form class="row justify-content-center align-items-center p-4">
             <label for="popupTitle">Movie Title: </label>
             <input id="popupTitle" type="text">
-            <label for="popupRating">Movie Rating: </label>
-            <input id="popupRating" type="text">
             <button class="mt-2" type="submit" id="edit">Add Movie</button>
         </form>
     </div>
@@ -45,7 +37,9 @@
 
 <script src="js/jquery-3.6.0.js"></script>
 <script src="js/movie_exercise.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 
 </body>
