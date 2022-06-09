@@ -1,3 +1,11 @@
+body{
+    /*background-image: url("../img/loading.gif");*/
+    /*background-size: 300px 200px;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+background: black;
+}
+
 #hide{
     width: 400px;
     height: 200px;
@@ -12,4 +20,17 @@
 }
 input, button {
     border-radius: 10px;
+}
+#movies img {
+    height: 300px;
+    width: 200px;
+}
+nav {
+    background: #1AE883;
+    border-radius: 5px;
+    border-bottom: 3px solid black;
+}
+
+#movies {
+    color: floralwhite;
 }

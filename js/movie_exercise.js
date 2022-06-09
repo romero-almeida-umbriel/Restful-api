@@ -4,28 +4,56 @@
     //glitch url
     const URL = 'https://materialistic-joyous-cowl.glitch.me/movies';
     //Function to get all movie objects information
-    let allMovies = () => fetch(URL).then(res => res.json());
-    //Function to render movies
-    let renderMovies = () => {
-        allMovies().then(data => {
-            let movieTitle = data.map(movie =>{
-                return `<div class="col-2 movieCards">
-                    <h3>Title: ${movie.title}</h3>
-                    <h4>Rating: ${movie.rating}</h4>
-                    <button data-id=${movie.id} class="edit">Edit</button>
-                    <button data-id=${movie.id} class="delete">Remove</button>
-                    </div>`
-            })
+    const allMovies = () => fetch(URL).then(res => res.json());
+    let insertId;
+    let posterMovies = () => {
+        allMovies().then((movie, movieId) => {
+            movieId = movie.map(obj => obj.id)
+            console.log(movieId);
+            for (let id of movieId) {
 
-            $("#movies").html(movieTitle);
-            editComplete();
-            deleteMovies();
-
-        })
+            }
+            movie = movie.map(obj => obj.title)
+            console.log(movie);
 
 
-    };
-    renderMovies();
+            for (let mov of movie) {
+                const movieURL = `http://www.omdbapi.com/?i=tt3896198&apikey=43fb5106&t=${encodeURIComponent(mov)}`
+                fetch(movieURL).then(res => res.json()).then(res => {
+                    console.log(res);
+                    let movieTitle = `<div class="col-3 movieCards">
+                    <div>
+                      <img src=${res.Poster}>
+                      </div>
+                        <p>Genre: ${res.Genre}\n ${res.imdbRating}/10 </p>
+                        
+                        <button data-id=${insertId} class="edit">Edit</button>
+                        <button data-id=${insertId} class="delete">Remove</button>
+                        </div>`
+                    if (res[0]) {
+                        $("#movies").html(movieTitle)
+                        editComplete();
+                        deleteMovies();
+
+                    } else
+                    $("#movies").append(movieTitle);
+                    editComplete();
+                    deleteMovies();
+
+                })
+
+            }
+
+            $("#movies>img").css("display", "none");
+        });
+    }
+
+
+    setTimeout(posterMovies, 2000)
+
+
+
+
     //Fetch "POST"
     const addMovie = (movieObj) => {
         let options = {
@@ -67,7 +95,7 @@
             title: $('#movieTitle').val(),
             rating: $('#movieRating').val(),
         }
-        addMovie(addNewMovie).then(renderMovies)
+        addMovie(addNewMovie).then(posterMovies)
     });
 
     let deleteMovies = () => {
@@ -81,6 +109,7 @@
     let editComplete = () => {
         $(".edit").click((e) => {
             e.preventDefault();
+            console.log(e);
             let thisId = e.target.attributes[0].value;
             $("#hide").toggleClass("hiddenForm");
             $("#edit").click((e) => {
@@ -99,50 +128,27 @@
     //     allMovies().then((data) => {
     //         let newRatings = data
     //      console.log(newRatings);
-                // .map(rate => console.log(rate));
-            // newRatings = newRatings.sort((a, b) => a - b)
+    // .map(rate => console.log(rate));
+    // newRatings = newRatings.sort((a, b) => a - b)
 
 
-            // newRatings.map(movie => {
-            //     return `<div class="col-2 movieCards">
-            //         <h3>Title: ${movie.title}</h3>
-            //         <h4>Rating: ${movie.rating}</h4>
-            //         <button data-id=${movie.id} class="edit">Edit</button>
-            //         <button data-id=${movie.id} class="delete">Remove</button>
-            //         </div>`
-            // })
+    // newRatings.map(movie => {
+    //     return `<div class="col-2 movieCards">
+    //         <h3>Title: ${movie.title}</h3>
+    //         <h4>Rating: ${movie.rating}</h4>
+    //         <button data-id=${movie.id} class="edit">Edit</button>
+    //         <button data-id=${movie.id} class="delete">Remove</button>
+    //         </div>`
+    // })
 
 
-        // })
+    // })
 
     // }
     // sortRating();
 
     //movie poster api
     //Function to get all movie objects information
-    let posterMovies = () => allMovies().then((movie) => {
-        movie = movie.map(obj => obj.title)
-        console.log(movie);
-        for(let mov of movie) {
-            const movieURL = `http://www.omdbapi.com/?i=tt3896198&apikey=43fb5106&t=${encodeURIComponent(mov)}`
-            fetch(movieURL).then(res => res.json()).then(res => {
-                console.log(res);
-                let movieTitle = `<div class="col-2 movieCards">
-                        <h3>Title: ${res.Title}</h3>
-                        <h4>Genre: ${res.Genre}</h4>
-                        <h4>Rating: ${res.imdbRating}</h4>
-                        <button data-id=${res.id} class="edit">Edit</button>
-                        <button data-id=${res.id} class="delete">Remove</button>
-                        </div>`
-                $("#movies").append(movieTitle);
-                editComplete();
-                deleteMovies();
-            })
 
-        }
-
-
-    });
-    posterMovies()
 
 }());

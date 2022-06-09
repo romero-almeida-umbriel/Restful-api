@@ -8,13 +8,18 @@
     <link rel="stylesheet" href="css/movies.css">
 </head>
 <body>
-    <form>
-        <label for="movieTitle">Movie Title: </label>
-            <input id="movieTitle" type="text">
-        <label for="movieRating">Movie Rating: </label>
-            <input id="movieRating" type="text">
-        <button id="addMovie">Add Movie</button>
+<nav class="navbar p-3 mb-3 text-center d-flex ">
+    <h1>Movie Gallery</h1>
+    <form class="align-self-end">
+        <label for="movieTitle">Add a Movie: </label>
+        <input id="movieTitle" type="text" placeholder="Movie Title..">
+        <!--        <label for="movieRating">Movie Rating: </label>-->
+        <!--            <input id="movieRating" type="text">-->
+                <button id="addMovie">Add Movie</button>
     </form>
+
+</nav>
+
 
 
 
@@ -22,17 +27,18 @@
 
 <div class="row justify-content-center" id="main">
  <!-- CHANGE HTML CONTENT FROM 'LOADING GIF' TO MOVIE DATA-->
-<div class="row justify-content-end align-items-end" id="movies">
-    <img alt="loading-screen" src="img/loading.gif">
+<div class="row justify-content-center" id="movies">
+        <img class="justify-self-center" alt="loading-screen" src="img/loading.gif">
 </div>
+
 
     <div id="hide" class="col-12 mt-5 hiddenForm ">
         <form class="row justify-content-center align-items-center p-4">
             <label for="popupTitle">Movie Title: </label>
             <input id="popupTitle" type="text">
-            <label for="popupRating">Movie Rating: </label>
-            <input id="popupRating" type="text">
-            <button class="mt-2" type="submit" id="edit">Add Movie</button>
+<!--            <label for="popupRating">Movie Rating: </label>-->
+<!--            <input id="popupRating" type="text">-->
+<!--            <button class="mt-2" type="submit" id="edit">Add Movie</button>-->
         </form>
     </div>
 </div>
